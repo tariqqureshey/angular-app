@@ -1,5 +1,15 @@
 <div>
     <h2>List of Tasks</h2>
-    <input type="text" class="input" placeholder="Enter Task Name" (submit)="onSubmit()"><br>
-    <button class="btn btn-secondary" type="submit" (click)="onClick($event)">Add</button>
+    <form (ngSubmit)="onSubmit()">
+        <h5>Task name</h5>
+        <input type="text" class="forms" placeholder="Enter Task Name" [(ngModel)]="task" name="task" id="task">
+        <br>
+        <h5>Task Date</h5>
+        <input type="date" class="date" placeholder="Enter Task Date" [(ngModel)]="date" name="date" id="date">
+        <br>
+        <h5>Task Description</h5>
+        <input type="text" class="forms" placeholder="Enter Task Description" [(ngModel)]="desc" name="desc" id="desc">
+        <br>
+        <button class="btn btn-primary" type="submit" (click)="onClick($event)">Add</button>
+    </form>
 </div>
