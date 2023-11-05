@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import {Observable} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+
 
 @Component({
   selector: 'app-tasks',
@@ -6,13 +9,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tasks.component.css']
 })
 export class TasksComponent implements OnInit {
+  private apiUrl = 'http://localhost:5000/tasks'
+  
   task;
   date: Date;
   desc;
-  constructor(){}
+
+  add=true;
+
+  tasks;
+
+  constructor(private http:HttpClient){}
 
   ngOnInit(): void {
-      
+      this.tasks = this.getTasks();
+      //console.log(this.tasks);
   }
   onSubmit() {
     //console.log(this.date);
@@ -26,6 +37,14 @@ export class TasksComponent implements OnInit {
     //$event.preventDefault()
   }
 
-  
+  toggleAdd(){
+    this.add=!this.add;
+  }
+
+  getTasks(){
+    //this.tasks = this.http.get<string[]>(this.apiUrl);
+    //console.log(this.http.get<string[]>(this.apiUrl))
+    return this.http.get<string[]>(this.apiUrl);
+  }
 
 }
