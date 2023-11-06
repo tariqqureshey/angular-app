@@ -3,6 +3,7 @@ import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 
 
+
 @Component({
   selector: 'app-tasks',
   templateUrl: './tasks.component.html',
@@ -19,10 +20,15 @@ export class TasksComponent implements OnInit {
 
   tasks;
 
-  constructor(private http:HttpClient){}
+  constructor(private http:HttpClient){
+    http.get(this.apiUrl).subscribe(response=>{
+      this.tasks = response;
+      console.log(response[1].id);
+    })
+  }
 
   ngOnInit(): void {
-      this.tasks = this.getTasks();
+      //this.tasks = this.getTasks();
       //console.log(this.tasks);
   }
   onSubmit() {
@@ -32,7 +38,7 @@ export class TasksComponent implements OnInit {
     this.desc='';
   }
 
-  onClick($event) {
+  onClick() {
     //console.log('Button clicked', $event);
     //$event.preventDefault()
   }
@@ -44,7 +50,7 @@ export class TasksComponent implements OnInit {
   getTasks(){
     //this.tasks = this.http.get<string[]>(this.apiUrl);
     //console.log(this.http.get<string[]>(this.apiUrl))
-    return this.http.get<string[]>(this.apiUrl);
+    return this.http.get(this.apiUrl);
   }
 
 }
