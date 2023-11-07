@@ -21,21 +21,34 @@ export class TasksComponent implements OnInit {
   tasks;
 
   constructor(private http:HttpClient){
-    http.get(this.apiUrl).subscribe(response=>{
-      this.tasks = response;
-      console.log(response[1].id);
-    })
+    
   }
 
   ngOnInit(): void {
-      //this.tasks = this.getTasks();
-      //console.log(this.tasks);
+      this.http.get(this.apiUrl).subscribe(response=>{
+      this.tasks = response;
+    })
   }
   onSubmit() {
-    //console.log(this.date);
+    let taskObj = {
+      task: this.task,
+      date: this.date,
+      desc: this.desc
+    }
+
     this.task='';
     this.date=null;
     this.desc='';
+
+    //console.log(JSON.stringify(taskObj))
+    this.http.post(this.apiUrl, JSON.stringify(taskObj))
+    .subscribe(response =>{
+      taskObj['id'] = response
+      this.tasks.splice(0,0,taskObj)
+      console.log(taskObj)
+    })
+
+    
   }
 
   onClick() {
