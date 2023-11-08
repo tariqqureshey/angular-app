@@ -2,7 +2,7 @@
     <h2>List of Tasks</h2>
     <button class="btn btn-secondary" style="background-color: green;" (click)="toggleAdd()" *ngIf="!add">Add</button>
     <button class="btn btn-secondary" style="background-color: red;" (click)="toggleAdd()" *ngIf="add">Close</button>
-    <form (ngSubmit)="onSubmit()" *ngIf="add">
+    <form (ngSubmit)="onSubmit($event); taskForm.resetForm()" *ngIf="add" #taskForm="ngForm">
         <div class="form-group">
             <label for="taskName">Task name</label>
             <input required type="text" class="form-control" placeholder="Enter Task Name" [(ngModel)]="task" name="task" id="task" #ng="ngModel">

@@ -1,8 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import {Observable} from 'rxjs';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
-
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type':'application/json'
+  })
+}
 
 @Component({
   selector: 'app-tasks',
@@ -10,6 +14,8 @@ import {HttpClient} from '@angular/common/http';
   styleUrls: ['./tasks.component.css']
 })
 export class TasksComponent implements OnInit {
+
+
   private apiUrl = 'http://localhost:5000/tasks'
   
   task;
@@ -29,7 +35,7 @@ export class TasksComponent implements OnInit {
       this.tasks = response;
     })
   }
-  onSubmit() {
+  onSubmit($event) {
     let taskObj = {
       task: this.task,
       date: this.date,
@@ -39,13 +45,13 @@ export class TasksComponent implements OnInit {
     this.task='';
     this.date=null;
     this.desc='';
-
+    //console.log($event.target);
     //console.log(JSON.stringify(taskObj))
-    this.http.post(this.apiUrl, JSON.stringify(taskObj))
+    this.http.post(this.apiUrl, JSON.stringify(taskObj), httpOptions)
     .subscribe(response =>{
       taskObj['id'] = response
       this.tasks.splice(0,0,taskObj)
-      console.log(taskObj)
+      //console.log(taskObj)
     })
 
     
