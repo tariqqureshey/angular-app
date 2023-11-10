@@ -1,7 +1,12 @@
 <div>
-    <h2>List of Tasks</h2>
-    <button class="btn btn-secondary" style="background-color: green;" (click)="toggleAdd()" *ngIf="!add">Add</button>
-    <button class="btn btn-secondary" style="background-color: red;" (click)="toggleAdd()" *ngIf="add">Close</button>
+    <h2>List of Tasks
+        <button class="btn btn-secondary" style="background-color: green;" (click)="toggleAdd()" *ngIf="!add">
+            Add
+        </button>
+        <button class="btn btn-secondary" style="background-color: red;" (click)="toggleAdd()" *ngIf="add">
+            Close
+        </button>
+        </h2>
     <form (ngSubmit)="onSubmit($event); taskForm.resetForm()" *ngIf="add" #taskForm="ngForm">
         <div class="form-group">
             <label for="taskName">Task name</label>
@@ -20,10 +25,22 @@
     </form>
     <ul class="list-group">
         <li class="list-group" *ngFor="let i of tasks">
-            <div>
-                <h4>{{i.task}}</h4>
+            <div class="div task">
+                <h4>{{i.task}}
+                    <fa-icon
+                    [icon]="faPenToSquare"
+                    (click)="onEdit(i)"
+                    class="fa-icon edit">
+                    </fa-icon>
+                    <fa-icon 
+                    [icon]="faTrashCan" 
+                    (click)="onDelete(i)">
+                    </fa-icon>
+                </h4>
                 <h6>{{i.date}}</h6>
-                <p>{{i.desc}}</p>
+                <p>{{i.desc}}
+                    
+                </p>
             </div>
         </li>
     </ul>

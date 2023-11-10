@@ -1,0 +1,50 @@
+fa-icon.edit{
+    position: absolute;
+    right: 75px
+}
+fa-icon.edit:hover{
+    background-size: 5px;
+    background-color: darkslategray;
+    color: green;
+    box-shadow: 0px 1px 0px 2px green;
+    transition: 0.3s;
+}
+fa-icon.edit:active{
+    box-shadow: none;
+    background-color: black;
+    transition: 0.5s;
+}
+fa-icon {
+    position: absolute;
+    right: 40px;
+    margin-left: 10px;
+    color:blue;
+    cursor:pointer;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 3px;
+    box-shadow: 0px 1px 0px 2px blue ;
+    padding: 2px;
+    background-color: lightblue;
+}
+fa-icon:hover {
+    background-size: 5px;
+    background-color: purple;
+    color: red;
+    box-shadow: 0px 1px 0px 2px red;
+    transition: 0.3s;
+}
+fa-icon:active{
+    box-shadow: none;
+    background-color: black;
+    transition: 0.5s;
+}
+div.task{
+    border: solid;
+    border-color: gray;
+    background-color: whitesmoke;
+    border-bottom-width: 5px;
+    border-radius: 5px;
+    margin: 2px;
+    padding: 10px;
+}

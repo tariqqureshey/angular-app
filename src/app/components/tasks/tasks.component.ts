@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import {Observable} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { faTrashCan, faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -25,6 +26,9 @@ export class TasksComponent implements OnInit {
   add=true;
 
   tasks;
+
+  faTrashCan = faTrashCan;
+  faPenToSquare = faPenToSquare;
 
   constructor(private http:HttpClient){
     
@@ -70,6 +74,19 @@ export class TasksComponent implements OnInit {
     //this.tasks = this.http.get<string[]>(this.apiUrl);
     //console.log(this.http.get<string[]>(this.apiUrl))
     return this.http.get(this.apiUrl);
+  }
+
+  onDelete(task){
+    console.log(task);
+    this.http.delete(this.apiUrl+'/'+task.id)
+    .subscribe(response => {
+      let i = this.tasks.indexOf(task);
+      this.tasks.splice(i,1)
+    })
+  }
+
+  onEdit(task){
+
   }
 
 }
